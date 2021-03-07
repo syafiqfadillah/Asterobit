@@ -34,13 +34,18 @@ def update():
         player.collid(entity)
     
     line_appeared_enemy = random.randint(-4, -1)
-    if enemy.y <= line_appeared_enemy:
+    if enemy.y <= line_appeared_enemy or powerful_enemy.y <= line_appeared_enemy:
         enemy = enemy.generate()
-        enemy_entity.append(enemy)
-    
-    if powerful_enemy.y <= line_appeared_enemy:
         powerful_enemy = powerful_enemy.generate()
+
         powerful_enemy.transformation()
+
+        enemy_entity.append(enemy)
         enemy_entity.append(powerful_enemy)
+
+    # if powerful_enemy.y <= line_appeared_enemy:
+    #     powerful_enemy = powerful_enemy.generate()
+    #     powerful_enemy.transformation()
+    #     enemy_entity.append(powerful_enemy)
 
 app.run()
