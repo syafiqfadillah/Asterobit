@@ -26,11 +26,7 @@ def update():
     global enemy
     global powerful_enemy
 
-    player.movement()
-
     for entity in enemy_entity:
-        entity.movement()
-
         player.collid(entity)
     
     line_appeared_enemy = random.randint(-4, -1)

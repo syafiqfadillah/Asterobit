@@ -22,16 +22,6 @@ class Player(Entity):
         self.collider = collider
         self.health = HealthBar(roundness=.5, value=50)
 
-    def movement(self):
-        if held_keys["up arrow"]:
-            self.y += 0.08
-        elif held_keys["down arrow"]:
-            self.y -= 0.08
-        elif held_keys["right arrow"]:
-            self.x += 0.08
-        elif held_keys["left arrow"]:
-            self.x -= 0.08
-
     def collid(self, other):
         hit_info = self.intersects()
         if hit_info.hit:
@@ -40,6 +30,16 @@ class Player(Entity):
 
                 if self.health.value == 0:
                     self.enabled = False
+    
+    def update(self):
+        if held_keys["up arrow"]:
+            self.y += 0.08
+        elif held_keys["down arrow"]:
+            self.y -= 0.08
+        elif held_keys["right arrow"]:
+            self.x += 0.08
+        elif held_keys["left arrow"]:
+            self.x -= 0.08
 
 
 class Enemy(Entity):
@@ -58,14 +58,14 @@ class Enemy(Entity):
         self.position = position
         self.collider = collider
 
-    def movement(self):
-        self.y -= 0.08
-
     def generate(self):
         spawn_rate_pos = (random.randint(-6, 5), 6)
         other = duplicate(self, position=spawn_rate_pos)
 
         return other
+    
+    def update(self):
+        self.y -= 0.08
 
 
 class PowerfulEnemy(Enemy):
